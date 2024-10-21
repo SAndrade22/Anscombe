@@ -1,0 +1,73 @@
+---
+title: "dataSaurus"
+author: "Sebastian Andrade"
+date: "2024-09-23"
+output: html_document
+---
+
+```{r}
+#install.packages("datasauRus")
+#install.packages("ggplot2")
+#install.packages("dplyr")
+
+library(datasauRus)
+library(ggplot2)
+library(dplyr)
+
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(
+    mean_x    = mean(x),
+    mean_y    = mean(y),
+    std_dev_x = sd(x),
+    std_dev_y = sd(y),
+    corr_x_y  = cor(x,y)
+  )
+```
+```{r}
+#
+library(datasauRus)
+library(ggplot2)
+ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset))+
+  geom_point()+
+  theme_void()+
+  theme(legend.position = "none")+
+  facet_wrap(~dataset, ncol = 3)
+```
+```{r}
+#
+library(datasauRus)
+library(ggplot2)
+library(dplyr)
+
+away_data <- datasaurus_dozen %>% filter(dataset == "away")
+
+away_lm <- lm(y ~ x, data = away_data)
+
+summary(away_lm)
+
+ggplot(away_data, aes(x = x, y = y)) +
+  geom_point(color = "red") +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +  
+  ggtitle("Regresión lineal 'away'") +
+  theme_minimal()  
+```
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
