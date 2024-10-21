@@ -2,7 +2,7 @@
 ## Carrera de Ingeniería en Ciencias de la Computación
 ### Periodo 2024-2025
 
-**Estudiante**: Sebastian Andrade
+**Estudiante**: Juan Sebastian Andrade Alulema
 
 ## Breve Explicación del Cuarteto de Anscombe
 
